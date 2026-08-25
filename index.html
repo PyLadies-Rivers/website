@@ -73,7 +73,7 @@
     color:var(--navy); text-decoration:none;
   }
   .brand-mark{
-    width:38px; height:38px; object-fit:contain;
+    width:52px; height:52px; object-fit:contain;
     flex-shrink:0;
   }
   nav.links{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
@@ -288,6 +288,37 @@
   .program li:first-child{border-top:none;}
   .program li .tick{color:var(--red); font-family:'JetBrains Mono', monospace; flex-shrink:0;}
 
+  /* ---------- WORKSHOP ---------- */
+  .workshop-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:start;
+  }
+  @media (max-width:860px){ .workshop-grid{grid-template-columns:1fr;} }
+  .workshop-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px;
+  }
+  .workshop-list{list-style:none; margin:0 0 24px; padding:0;}
+  .workshop-list li{
+    padding:12px 0; border-top:1px solid var(--line);
+    display:flex; gap:12px; font-size:0.95rem; color:var(--ink-soft);
+  }
+  .workshop-list li:first-child{border-top:none;}
+  .workshop-list li .tick{color:var(--red); font-family:'JetBrains Mono', monospace; flex-shrink:0;}
+  .grant-note{
+    font-size:0.85rem; color:var(--ink-soft); margin:0 0 20px;
+  }
+
+  /* ---------- CODE OF CONDUCT ---------- */
+  .conduct-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:32px; max-width:760px;
+  }
+  .conduct-card p{color:var(--ink-soft); font-size:0.98rem;}
+  .conduct-card a.inline{color:var(--blue); font-weight:600; text-decoration:underline;}
+  .conduct-report{
+    margin-top:22px; padding-top:22px; border-top:1px solid var(--line);
+  }
+
   /* ---------- RESOURCES / LINKS ---------- */
   .res-grid{
     display:grid; grid-template-columns:repeat(4, 1fr); gap:20px;
@@ -339,7 +370,7 @@
     display:flex; justify-content:space-between; align-items:flex-start; gap:24px; flex-wrap:wrap;
     padding-bottom:32px; border-bottom:1px solid rgba(255,255,255,0.1);
   }
-  .foot-brand{color:#fff; font-family:'Fraunces', serif; font-weight:700; font-size:1.2rem;}
+  .foot-brand{display:flex; align-items:center; color:#fff; font-family:'Fraunces', serif; font-weight:700; font-size:1.2rem;}
   .foot-links{display:flex; gap:32px; flex-wrap:wrap;}
   .foot-links a{text-decoration:none; color:#B9C2D6; font-size:0.92rem;}
   .foot-links a:hover{color:#fff;}
@@ -362,6 +393,8 @@
       <li><a href="#about">About</a></li>
       <li><a href="#program">Training</a></li>
       <li><a href="#curriculum">Curriculum</a></li>
+      <li><a href="#workshop">Workshop</a></li>
+      <li><a href="#conduct">Code of Conduct</a></li>
       <li><a href="#resources">Resources</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -374,6 +407,8 @@
     <a href="#about">About</a>
     <a href="#program">Training</a>
     <a href="#curriculum">Curriculum</a>
+    <a href="#workshop">Workshop</a>
+    <a href="#conduct">Code of Conduct</a>
     <a href="#resources">Resources</a>
     <a href="#contact">Contact</a>
     <a href="https://whatsapp.com/channel/0029Vb6Et85KrWR2q7H9j52o" target="_blank" rel="noopener">Join the WhatsApp channel</a>
@@ -505,11 +540,56 @@
     </div>
   </section>
 
+  <!-- WORKSHOP -->
+  <section id="workshop">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · UPCOMING WORKSHOP</span>
+        <h2>In-Person Python Workshop — Port Harcourt</h2>
+        <p>A free, 2-day, in-person, mentor-led Python workshop for beginner women and girls in Rivers State — extending our WhatsApp-based training program for learners who want hands-on, in-person support.</p>
+      </div>
+      <div class="workshop-grid">
+        <div class="workshop-card">
+          <ul class="workshop-list">
+            <li><span class="tick">&gt;&gt;&gt;</span> Friday, February 12, 2027 — 10am–4pm (6 hours): Python fundamentals, guided practice</li>
+            <li><span class="tick">&gt;&gt;&gt;</span> Saturday, February 13, 2027 — 10am–4pm (6 hours): control flow, functions, mentor-supported mini-project</li>
+            <li><span class="tick">&gt;&gt;&gt;</span> Location: Port Harcourt, Rivers State, Nigeria</li>
+            <li><span class="tick">&gt;&gt;&gt;</span> Open to 30 beginners — no prior coding experience required</li>
+            <li><span class="tick">&gt;&gt;&gt;</span> Mentor-supported, roughly 1 mentor per 7–8 participants</li>
+          </ul>
+          <a class="btn btn-primary" href="mailto:rivers@pyladies.com?subject=Workshop%20Registration%20-%20Feb%202027">Register for the workshop</a>
+        </div>
+        <div>
+          <p class="grant-note">Supported by the Python Software Foundation Grants Program.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CODE OF CONDUCT -->
+  <section id="conduct" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">05 · CODE OF CONDUCT</span>
+        <h2>A safe, respectful space for everyone</h2>
+      </div>
+      <div class="conduct-card">
+        <p>PyLadies Rivers is an official PyLadies Global chapter and adheres to the <a class="inline" href="https://pyladies.com/CodeOfConduct/" target="_blank" rel="noopener">PyLadies Code of Conduct</a>, adapted from the Python Software Foundation's Code of Conduct. This applies to all chapter events, training sessions, and community spaces — including our WhatsApp community, GitHub org, YouTube channel, and in-person workshops.</p>
+        <div class="conduct-report">
+          <p><strong>To report a concern or violation:</strong><br>
+          Email <a class="inline" href="mailto:rivers@pyladies.com">rivers@pyladies.com</a> (chapter contact) or
+          <a class="inline" href="mailto:coc@pyladies.com">coc@pyladies.com</a> (PyLadies Global Code of Conduct work group).
+          All reports are handled promptly and confidentially.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- RESOURCES -->
   <section id="resources">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">04 · LINKS &amp; RESOURCES</span>
+        <span class="eyebrow">06 · LINKS &amp; RESOURCES</span>
         <h2>Find us everywhere we build</h2>
         <p>Videos, code, community chat, and direct contact — all the ways to follow or join PyLadies Rivers.</p>
       </div>
@@ -542,7 +622,7 @@
   <section id="contact" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">05 · GET IN TOUCH</span>
+        <span class="eyebrow">07 · GET IN TOUCH</span>
         <h2>Reach the chapter directly</h2>
         <p>Questions about the training program, partnerships, or the chapter in general — these go straight to the team.</p>
       </div>
@@ -570,10 +650,12 @@
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <div class="foot-brand"><img src="assets/logo.png" alt="" style="width:28px;height:28px;object-fit:contain;vertical-align:-6px;margin-right:8px;">PyLadies Rivers</div>
+      <div class="foot-brand"><img src="assets/logo.png" alt="" style="width:34px;height:34px;object-fit:contain;margin-right:8px;">PyLadies Rivers</div>
       <div class="foot-links">
         <a href="#about">About</a>
         <a href="#program">Training</a>
+        <a href="#workshop">Workshop</a>
+        <a href="#conduct">Code of Conduct</a>
         <a href="#resources">Resources</a>
         <a href="#contact">Contact</a>
       </div>
