@@ -73,7 +73,7 @@
     color:var(--navy); text-decoration:none;
   }
   .brand-mark{
-    width:52px; height:52px; object-fit:contain;
+    width:76px; height:76px; object-fit:contain;
     flex-shrink:0;
   }
   nav.links{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
@@ -308,6 +308,38 @@
     font-size:0.85rem; color:var(--ink-soft); margin:0 0 20px;
   }
 
+  /* ---------- SPONSORS ---------- */
+  .sponsor-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
+  }
+  @media (max-width:860px){ .sponsor-grid{grid-template-columns:1fr;} }
+  .sponsor-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px; display:flex; flex-direction:column; gap:14px;
+  }
+  .sponsor-card.featured{
+    border:2px solid var(--red); position:relative;
+  }
+  .sponsor-tier-badge{
+    display:inline-block; font-family:'JetBrains Mono', monospace; font-size:0.72rem;
+    color:var(--red-deep); background:rgba(229,35,58,0.09);
+    padding:4px 10px; border-radius:999px; align-self:flex-start;
+  }
+  .sponsor-price{
+    font-family:'Fraunces', serif; font-weight:700; font-size:1.5rem; color:var(--navy);
+  }
+  .sponsor-card ul{list-style:none; margin:0; padding:0; flex-grow:1;}
+  .sponsor-card li{
+    padding:8px 0; border-top:1px solid var(--line);
+    font-size:0.92rem; color:var(--ink-soft);
+  }
+  .sponsor-card li:first-child{border-top:none;}
+  .sponsor-cta{
+    margin-top:24px; padding:24px; background:var(--paper); border-radius:var(--radius);
+    display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .sponsor-cta p{margin:0; color:var(--ink-soft); font-size:0.95rem;}
+
   /* ---------- CODE OF CONDUCT ---------- */
   .conduct-card{
     background:#fff; border:1px solid var(--line); border-radius:var(--radius);
@@ -394,6 +426,7 @@
       <li><a href="#program">Training</a></li>
       <li><a href="#curriculum">Curriculum</a></li>
       <li><a href="#workshop">Workshop</a></li>
+      <li><a href="#sponsors">Sponsors</a></li>
       <li><a href="#conduct">Code of Conduct</a></li>
       <li><a href="#resources">Resources</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -408,6 +441,7 @@
     <a href="#program">Training</a>
     <a href="#curriculum">Curriculum</a>
     <a href="#workshop">Workshop</a>
+    <a href="#sponsors">Sponsors</a>
     <a href="#conduct">Code of Conduct</a>
     <a href="#resources">Resources</a>
     <a href="#contact">Contact</a>
@@ -566,11 +600,57 @@
     </div>
   </section>
 
-  <!-- CODE OF CONDUCT -->
-  <section id="conduct" class="alt">
+  <!-- SPONSORS -->
+  <section id="sponsors" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">05 · CODE OF CONDUCT</span>
+        <span class="eyebrow">05 · PARTNER WITH US</span>
+        <h2>Sponsor the Port Harcourt Workshop</h2>
+        <p>Help us bring 30 beginner women and girls into tech with a free, in-person Python workshop on February 12–13, 2027. Sponsorship covers venue, materials, mentor support, and refreshments — and puts your organization in front of a growing community of Python learners in Rivers State.</p>
+      </div>
+      <div class="sponsor-grid">
+        <div class="sponsor-card">
+          <span class="sponsor-tier-badge mono">BRONZE</span>
+          <span class="sponsor-price">$100</span>
+          <ul>
+            <li>Logo on the workshop page of our website</li>
+            <li>Shoutout on our WhatsApp channel</li>
+            <li>Mention during workshop opening remarks</li>
+          </ul>
+        </div>
+        <div class="sponsor-card featured">
+          <span class="sponsor-tier-badge mono">SILVER</span>
+          <span class="sponsor-price">$300</span>
+          <ul>
+            <li>Everything in Bronze</li>
+            <li>Logo on printed workshop materials and certificates</li>
+            <li>Social media post on our channels naming your organization</li>
+            <li>5-minute speaking slot at the workshop (optional)</li>
+          </ul>
+        </div>
+        <div class="sponsor-card">
+          <span class="sponsor-tier-badge mono">GOLD</span>
+          <span class="sponsor-price">$700+</span>
+          <ul>
+            <li>Everything in Silver</li>
+            <li>Featured placement as lead sponsor across all materials and the website</li>
+            <li>Dedicated YouTube shoutout video segment</li>
+            <li>First right of refusal to sponsor future PyLadies Rivers workshops</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sponsor-cta">
+        <p>Every contribution — cash, venue, refreshments, or in-kind support — helps. Get in touch to discuss options.</p>
+        <a class="btn btn-primary" href="mailto:rivers@pyladies.com?subject=Sponsorship%20Inquiry%20-%20Feb%202027%20Workshop">Become a sponsor</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CODE OF CONDUCT -->
+  <section id="conduct">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">06 · CODE OF CONDUCT</span>
         <h2>A safe, respectful space for everyone</h2>
       </div>
       <div class="conduct-card">
@@ -586,10 +666,10 @@
   </section>
 
   <!-- RESOURCES -->
-  <section id="resources">
+  <section id="resources" class="alt">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">06 · LINKS &amp; RESOURCES</span>
+        <span class="eyebrow">07 · LINKS &amp; RESOURCES</span>
         <h2>Find us everywhere we build</h2>
         <p>Videos, code, community chat, and direct contact — all the ways to follow or join PyLadies Rivers.</p>
       </div>
@@ -619,10 +699,10 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="alt">
+  <section id="contact">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">07 · GET IN TOUCH</span>
+        <span class="eyebrow">08 · GET IN TOUCH</span>
         <h2>Reach the chapter directly</h2>
         <p>Questions about the training program, partnerships, or the chapter in general — these go straight to the team.</p>
       </div>
@@ -650,11 +730,12 @@
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <div class="foot-brand"><img src="assets/logo.png" alt="" style="width:34px;height:34px;object-fit:contain;margin-right:8px;">PyLadies Rivers</div>
+      <div class="foot-brand"><img src="assets/logo.png" alt="" style="width:52px;height:52px;object-fit:contain;margin-right:10px;">PyLadies Rivers</div>
       <div class="foot-links">
         <a href="#about">About</a>
         <a href="#program">Training</a>
         <a href="#workshop">Workshop</a>
+        <a href="#sponsors">Sponsors</a>
         <a href="#conduct">Code of Conduct</a>
         <a href="#resources">Resources</a>
         <a href="#contact">Contact</a>
