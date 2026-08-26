@@ -73,15 +73,15 @@
     color:var(--navy); text-decoration:none;
   }
   .brand-mark{
-    width:76px; height:76px; object-fit:contain;
+    width:96px; height:96px; object-fit:contain;
     flex-shrink:0;
   }
-  nav.links{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
-  nav.links a{
+  ul.links{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
+  ul.links a{
     text-decoration:none; font-weight:500; font-size:0.95rem; color:var(--ink-soft);
     transition:color .15s ease;
   }
-  nav.links a:hover{color:var(--red);}
+  ul.links a:hover{color:var(--red);}
   .nav-cta{
     display:inline-flex; align-items:center; gap:8px;
     background:var(--navy); color:#fff !important;
@@ -94,7 +94,7 @@
   .menu-btn span{display:block; width:24px; height:2px; background:var(--navy); margin:5px 0; border-radius:2px;}
 
   @media (max-width:860px){
-    nav.links, .nav-cta{display:none;}
+    ul.links, .nav-cta{display:none;}
     .menu-btn{display:block;}
     .nav.open ~ .mobile-panel{display:flex;}
   }
@@ -660,6 +660,14 @@
           Email <a class="inline" href="mailto:rivers@pyladies.com">rivers@pyladies.com</a> (chapter contact) or
           <a class="inline" href="mailto:coc@pyladies.com">coc@pyladies.com</a> (PyLadies Global Code of Conduct work group).
           All reports are handled promptly and confidentially.</p>
+        </div>
+        <div class="conduct-report">
+          <p><strong>Code of Conduct Enforcement Team:</strong></p>
+          <ul style="list-style:none; margin:0; padding:0; color:var(--ink-soft); font-size:0.95rem;">
+            <li style="padding:6px 0;">Fredrick Ughimi — Lead Organizer — <a class="inline" href="mailto:rivers@pyladies.com">rivers@pyladies.com</a></li>
+            <li style="padding:6px 0;">Fabian Uzukwu — Mentor — <a class="inline" href="mailto:mayorogbanna@gmail.com">mayorogbanna@gmail.com</a> · <a class="inline" href="tel:+2347033726470">+234 703 372 6470</a></li>
+            <li style="padding:6px 0;">Anita Akhor — Co-organizer — <a class="inline" href="tel:+2348033170999">+234 803 317 0999</a></li>
+          </ul>
         </div>
       </div>
     </div>
