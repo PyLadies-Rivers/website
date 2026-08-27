@@ -308,6 +308,30 @@
     font-size:0.85rem; color:var(--ink-soft); margin:0 0 20px;
   }
 
+  /* ---------- REGISTRATION FORM ---------- */
+  .reg-form{
+    display:flex; flex-direction:column; gap:16px; margin-top:24px;
+  }
+  .reg-field{display:flex; flex-direction:column; gap:6px;}
+  .reg-field label{font-size:0.88rem; font-weight:600; color:var(--navy);}
+  .reg-field input, .reg-field select, .reg-field textarea{
+    font-family:'Inter', sans-serif; font-size:0.95rem;
+    padding:12px 14px; border:1.5px solid var(--line); border-radius:10px;
+    background:#fff; color:var(--ink);
+  }
+  .reg-field input:focus, .reg-field select:focus, .reg-field textarea:focus{
+    outline:none; border-color:var(--blue);
+  }
+  .reg-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:560px){ .reg-row{grid-template-columns:1fr;} }
+  .reg-submit{
+    background:var(--red); color:#fff; border:none; cursor:pointer;
+    padding:14px 24px; border-radius:999px; font-weight:600; font-size:0.95rem;
+    align-self:flex-start; transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .reg-submit:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(229,35,58,0.35);}
+  .reg-note{font-size:0.82rem; color:var(--ink-soft); margin-top:4px;}
+
   /* ---------- SPONSORS ---------- */
   .sponsor-grid{
     display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
@@ -591,7 +615,79 @@
             <li><span class="tick">&gt;&gt;&gt;</span> Open to 30 beginners — no prior coding experience required</li>
             <li><span class="tick">&gt;&gt;&gt;</span> Mentor-supported, roughly 1 mentor per 7–8 participants</li>
           </ul>
-          <a class="btn btn-primary" href="mailto:rivers@pyladies.com?subject=Workshop%20Registration%20-%20Feb%202027">Register for the workshop</a>
+
+          <form class="reg-form" action="https://formsubmit.co/rivers@pyladies.com" method="POST">
+            <input type="hidden" name="_subject" value="New PyLadies Rivers Workshop Registration">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://pyladies-rivers.github.io/website/#workshop">
+
+            <div class="reg-row">
+              <div class="reg-field">
+                <label for="reg-name">Full Name</label>
+                <input type="text" id="reg-name" name="Full Name" required>
+              </div>
+              <div class="reg-field">
+                <label for="reg-email">Email Address</label>
+                <input type="email" id="reg-email" name="Email" required>
+              </div>
+            </div>
+
+            <div class="reg-row">
+              <div class="reg-field">
+                <label for="reg-phone">WhatsApp Number</label>
+                <input type="tel" id="reg-phone" name="WhatsApp Number" placeholder="+234..." required>
+              </div>
+              <div class="reg-field">
+                <label for="reg-age">Age Range</label>
+                <select id="reg-age" name="Age Range" required>
+                  <option value="">Select...</option>
+                  <option>Under 18</option>
+                  <option>18–24</option>
+                  <option>25–34</option>
+                  <option>35+</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="reg-field">
+              <label for="reg-exp">Prior coding experience</label>
+              <select id="reg-exp" name="Prior Experience" required>
+                <option value="">Select...</option>
+                <option>None at all</option>
+                <option>A little (self-taught/dabbled)</option>
+                <option>Some formal exposure</option>
+              </select>
+            </div>
+
+            <div class="reg-row">
+              <div class="reg-field">
+                <label for="reg-laptop">Access to a laptop for the workshop?</label>
+                <select id="reg-laptop" name="Laptop Access" required>
+                  <option value="">Select...</option>
+                  <option>Yes</option>
+                  <option>No</option>
+                  <option>Can share with someone</option>
+                </select>
+              </div>
+              <div class="reg-field">
+                <label for="reg-days">Can you attend both days?</label>
+                <select id="reg-days" name="Both Days" required>
+                  <option value="">Select...</option>
+                  <option>Yes</option>
+                  <option>No</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="reg-field">
+              <label for="reg-notes">Dietary restrictions or accessibility needs (optional)</label>
+              <textarea id="reg-notes" name="Notes" rows="2"></textarea>
+            </div>
+
+            <button type="submit" class="reg-submit">Submit Registration</button>
+            <p class="reg-note">Your details go directly to the PyLadies Rivers team and are never shared publicly.</p>
+          </form>
         </div>
         <div>
           <p class="grant-note">Supported by the Python Software Foundation Grants Program.</p>
