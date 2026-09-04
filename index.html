@@ -448,6 +448,7 @@
     <ul class="links">
       <li><a href="#about">About</a></li>
       <li><a href="#program">Training</a></li>
+      <li><a href="#cohort-register">Register</a></li>
       <li><a href="#curriculum">Curriculum</a></li>
       <li><a href="#workshop">Workshop</a></li>
       <li><a href="#sponsors">Sponsors</a></li>
@@ -463,6 +464,7 @@
   <div class="mobile-panel" id="mobilePanel">
     <a href="#about">About</a>
     <a href="#program">Training</a>
+    <a href="#cohort-register">Register</a>
     <a href="#curriculum">Curriculum</a>
     <a href="#workshop">Workshop</a>
     <a href="#sponsors">Sponsors</a>
@@ -544,17 +546,98 @@
     <div class="wrap">
       <div class="program">
         <div>
-          <span class="badge">JULY – AUGUST 2026</span>
-          <h2>Python Training Program</h2>
-          <p>A structured, cohort-based introduction to Python — designed for absolute beginners and delivered with curriculum videos, live sessions, and community support.</p>
-          <a class="btn btn-primary" style="margin-top:20px;" href="https://whatsapp.com/channel/0029Vb6Et85KrWR2q7H9j52o" target="_blank" rel="noopener">Get program updates on WhatsApp</a>
+          <span class="badge">🚨 REGISTRATION OPEN — OCT/NOV 2026 COHORT</span>
+          <h2>Our next Python cohort starts October 3rd</h2>
+          <p>Are you ready to learn a valuable tech skill? No matter your background, you can join our community, learn alongside others, receive mentorship, and take your first steps into Python programming.</p>
+          <p>8 weeks, every Saturday, October 3 – November 21, 2026. Registration is open now.</p>
+          <a class="btn btn-primary" style="margin-top:20px;" href="#cohort-register">Register for the cohort</a>
         </div>
         <ul>
-          <li><span class="tick">&gt;&gt;&gt;</span> Python fundamentals: variables, loops, functions, data structures</li>
+          <li><span class="tick">&gt;&gt;&gt;</span> No coding experience required — start from zero</li>
           <li><span class="tick">&gt;&gt;&gt;</span> Guided curriculum videos, built for self-paced review</li>
-          <li><span class="tick">&gt;&gt;&gt;</span> Hands-on practice with real beginner-friendly projects</li>
+          <li><span class="tick">&gt;&gt;&gt;</span> Mentorship and hands-on beginner-friendly projects</li>
           <li><span class="tick">&gt;&gt;&gt;</span> Community support via WhatsApp and our GitHub org</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- COHORT REGISTRATION -->
+  <section id="cohort-register" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">REGISTER NOW</span>
+        <h2>Join the October/November 2026 Cohort</h2>
+        <p>8 weeks, every Saturday, starting October 3, 2026. Free, beginner-friendly, and open to all women and girls in Rivers State.</p>
+      </div>
+      <div class="workshop-card" style="max-width:640px;">
+        <form class="reg-form" action="https://formsubmit.co/rivers@pyladies.com" method="POST">
+          <input type="hidden" name="_subject" value="New Oct/Nov 2026 Cohort Registration">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://pyladies-rivers.github.io/website/#cohort-register">
+
+          <div class="reg-row">
+            <div class="reg-field">
+              <label for="cohort-name">Full Name</label>
+              <input type="text" id="cohort-name" name="Full Name" required>
+            </div>
+            <div class="reg-field">
+              <label for="cohort-email">Email Address</label>
+              <input type="email" id="cohort-email" name="Email" required>
+            </div>
+          </div>
+
+          <div class="reg-row">
+            <div class="reg-field">
+              <label for="cohort-phone">WhatsApp Number</label>
+              <input type="tel" id="cohort-phone" name="WhatsApp Number" placeholder="+234..." required>
+            </div>
+            <div class="reg-field">
+              <label for="cohort-age">Age Range</label>
+              <select id="cohort-age" name="Age Range" required>
+                <option value="">Select...</option>
+                <option>Under 18</option>
+                <option>18–24</option>
+                <option>25–34</option>
+                <option>35+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="reg-field">
+            <label for="cohort-exp">Prior coding experience</label>
+            <select id="cohort-exp" name="Prior Experience" required>
+              <option value="">Select...</option>
+              <option>None at all</option>
+              <option>A little (self-taught/dabbled)</option>
+              <option>Some formal exposure</option>
+            </select>
+          </div>
+
+          <div class="reg-field">
+            <label for="cohort-device">What will you use to join sessions?</label>
+            <select id="cohort-device" name="Device Access" required>
+              <option value="">Select...</option>
+              <option>Laptop with reliable internet</option>
+              <option>Phone only</option>
+              <option>Laptop but limited data/internet</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+
+          <div class="reg-field">
+            <label for="cohort-commit">Can you commit to weekly Saturday sessions for 8 weeks?</label>
+            <select id="cohort-commit" name="Weekly Commitment" required>
+              <option value="">Select...</option>
+              <option>Yes</option>
+              <option>Mostly, may miss a session or two</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+
+          <button type="submit" class="reg-submit">Register for the Cohort</button>
+          <p class="reg-note">Your details go directly to the PyLadies Rivers team and are never shared publicly.</p>
+        </form>
       </div>
     </div>
   </section>
