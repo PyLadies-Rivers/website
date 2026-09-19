@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PyLadies Rivers — Python, taught by women, for everyone</title>
+<meta name="description" content="PyLadies Rivers is the official PyLadies Global chapter in Rivers State, Nigeria, teaching Python to beginners through free training, community, and mentorship.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFFFF;
+    --cream:#FFFDFB;
+    --paper:#FDF3F2;          /* faint red-tinted paper for alt sections — replaces the old tan/gold paper */
+    --ink:#1B1B1F;
+    --ink-soft:#5A5A63;
+    --ink-faint:#8B8B93;
+    --red:#E5233A;             /* PyLadies Global red */
+    --red-deep:#B81C2E;
+    --red-pale:rgba(229,35,58,0.07);
+    --red-pale-2:rgba(229,35,58,0.13);
+    --line: rgba(27,27,31,0.10);
+    --line-strong: rgba(27,27,31,0.16);
+    --bronze:#A9662E;
+    --silver:#787B85;
+    --tier-gold:#B4830D;
+    --radius: 14px;
+    --radius-lg: 20px;
+    --max: 1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter', system-ui, sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0 0 0.45em 0;
+    color:var(--ink);
+    line-height:1.15;
+  }
+  a{color:inherit;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+
+  a:focus-visible, button:focus-visible, dialog:focus-visible{
+    outline:3px solid var(--red-deep);
+    outline-offset:3px;
+  }
+
+  svg{display:block;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(255,255,255,0.94);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px;
+    padding:10px 24px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces', serif; font-weight:700; font-size:1.05rem;
+    color:var(--ink); text-decoration:none;
+    flex-shrink:0;
+  }
+  .brand-mark{
+    height:56px; width:auto; object-fit:contain;
+    flex-shrink:0;
+  }
+  @media (max-width:480px){
+    .brand-mark{ height:44px; }
+    .brand span{ display:none; } /* logo image already carries the full wordmark; drop the duplicate text label once space is tight */
+  }
+  ul.links{display:flex; gap:24px; list-style:none; margin:0; padding:0;}
+  ul.links a{
+    text-decoration:none; font-weight:500; font-size:0.92rem; color:var(--ink-soft);
+    transition:color .15s ease;
+  }
+  ul.links a:hover{color:var(--red);}
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--red); color:#fff !important;
+    padding:9px 18px; border-radius:999px; text-decoration:none;
+    font-weight:600; font-size:0.88rem;
+    transition:transform .15s ease, background .15s ease;
+    flex-shrink:0;
+  }
+  .nav-cta:hover{background:var(--red-deep); transform:translateY(-1px);}
+  .menu-btn{display:none; background:none; border:none; cursor:pointer; padding:6px; flex-shrink:0;}
+  .menu-btn span{display:block; width:24px; height:2px; background:var(--ink); margin:5px 0; border-radius:2px;}
+
+  @media (max-width:900px){
+    ul.links, .nav-cta{display:none;}
+    .menu-btn{display:block;}
+  }
+  .mobile-panel{
+    display:none; flex-direction:column; gap:2px;
+    padding:8px 24px 20px;
+    border-bottom:1px solid var(--line);
+    background:var(--white);
+  }
+  .mobile-panel.is-open{display:flex;}
+  .mobile-panel a{
+    padding:12px 0; text-decoration:none; color:var(--ink); font-weight:500;
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-panel a:last-child{border-bottom:none;}
+  .mobile-panel .mp-cta{
+    margin-top:10px; text-align:center; border-bottom:none;
+    background:var(--red); color:#fff; border-radius:999px; font-weight:600;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:56px 0 48px;
+    position:relative;
+    overflow:hidden;
+  }
+  @media (min-width:700px){ .hero{ padding:76px 0 60px; } }
+  .hero::before{
+    content:"";
+    position:absolute; top:-140px; right:-140px;
+    width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(229,35,58,0.14), transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center;
+    position:relative;
+  }
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr; gap:36px;} }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; font-weight:500;
+    letter-spacing:0.02em;
+    color:var(--red-deep); background:var(--red-pale);
+    padding:6px 12px; border-radius:999px; margin-bottom:18px;
+  }
+  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--red);}
+
+  .hero h1{
+    font-size:clamp(2.1rem, 5.2vw, 3.5rem);
+  }
+  .hero h1 .accent{color:var(--red); font-style:italic;}
+  .hero p.lead{
+    font-size:1.1rem; color:var(--ink-soft); max-width:46ch; margin:16px 0 20px;
+  }
+
+  .urgency-pill{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--ink); color:#fff;
+    padding:10px 16px; border-radius:999px;
+    font-size:0.86rem; font-weight:600; margin-bottom:24px;
+  }
+  .urgency-pill svg{ flex-shrink:0; color:#FF8A9A; }
+  .urgency-pill strong{ color:#FF8A9A; font-weight:700; }
+
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 26px; border-radius:999px; text-decoration:none;
+    font-weight:600; font-size:0.95rem; border:none; cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    font-family:inherit;
+  }
+  .btn-primary{background:var(--red); color:#fff;}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(229,35,58,0.35); background:var(--red-deep);}
+  .btn-ghost{background:transparent; border:1.5px solid var(--line-strong); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink); transform:translateY(-2px);}
+  .btn-on-dark{border:1.5px solid rgba(255,255,255,0.5); color:#fff;}
+  .btn-on-dark:hover{border-color:#fff; background:rgba(255,255,255,0.1); transform:translateY(-2px);}
+  .btn-block{width:100%; justify-content:center;}
+
+  .hero-art{
+    position:relative; border-radius:var(--radius-lg); overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(27,27,31,0.3);
+    border:1px solid var(--line);
+  }
+  .hero-art img{ display:block; width:100%; height:auto; }
+
+  /* ---------- SECTION BASE ---------- */
+  section{padding:56px 0;}
+  @media (min-width:700px){ section{padding:80px 0;} }
+  .section-head{max-width:640px; margin-bottom:36px;}
+  @media (min-width:700px){ .section-head{margin-bottom:44px;} }
+  .section-head p{color:var(--ink-soft); font-size:1.04rem;}
+  .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+
+  .alt{background:var(--paper);}
+
+  /* ---------- URGENT COHORT BLOCK (was .program) ---------- */
+  .cohort-block{
+    background:linear-gradient(155deg, var(--red-deep), var(--red) 70%);
+    color:#fff; border-radius:var(--radius-lg);
+    padding:36px 24px; display:grid; grid-template-columns:1.05fr 0.95fr; gap:36px; align-items:center;
+    position:relative; overflow:hidden;
+  }
+  @media (min-width:700px){ .cohort-block{padding:48px;} }
+  @media (max-width:820px){ .cohort-block{grid-template-columns:1fr;} }
+  .cohort-block h2{color:#fff; margin-bottom:0.3em;}
+  .cohort-block p{color:rgba(255,255,255,0.88);}
+  .badge-open{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono', monospace; font-size:0.75rem; font-weight:600;
+    letter-spacing:0.03em;
+    background:rgba(255,255,255,0.18); color:#fff;
+    padding:6px 12px; border-radius:999px; margin-bottom:16px;
+  }
+  .badge-open .live-dot{width:7px; height:7px; border-radius:50%; background:#fff; animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.35;}}
+
+  .countdown{
+    display:flex; gap:10px; margin:22px 0 22px;
+  }
+  .countdown .stat{
+    background:rgba(255,255,255,0.13); border:1px solid rgba(255,255,255,0.22);
+    border-radius:12px; padding:12px 16px; min-width:76px; text-align:center;
+  }
+  .countdown .stat .num{
+    font-family:'JetBrains Mono', monospace; font-size:1.7rem; font-weight:700; display:block; line-height:1;
+  }
+  .countdown .stat .lbl{
+    font-size:0.65rem; letter-spacing:0.06em; text-transform:uppercase; color:rgba(255,255,255,0.75);
+    display:block; margin-top:6px;
+  }
+  .countdown-note{font-size:0.85rem; color:rgba(255,255,255,0.8); margin:0 0 22px;}
+
+  .cohort-block ul{list-style:none; margin:0; padding:0; border-top:1px solid rgba(255,255,255,0.22);}
+  .cohort-block li{
+    padding:13px 0; border-bottom:1px solid rgba(255,255,255,0.22);
+    display:flex; gap:12px; font-size:0.95rem; align-items:flex-start;
+  }
+  .cohort-block li svg{ flex-shrink:0; margin-top:3px; color:#FFD7DC; }
+
+  /* ---------- CARDS ---------- */
+  .about-top{
+    display:grid; grid-template-columns:1.2fr 0.8fr; gap:44px; align-items:center;
+    margin-bottom:44px;
+  }
+  @media (max-width:820px){ .about-top{grid-template-columns:1fr;} }
+  .pillars{
+    margin-top:18px; font-size:0.76rem; color:var(--red-deep); letter-spacing:0.06em; font-weight:600;
+  }
+  .about-mascots{
+    width:100%; max-width:340px; height:auto; justify-self:center;
+  }
+  .ada-grid{
+    display:grid; grid-template-columns:0.7fr 1.3fr; gap:44px; align-items:center;
+  }
+  @media (max-width:820px){ .ada-grid{grid-template-columns:1fr;} .ada-img{max-width:240px; margin:0 auto;} }
+  .ada-img{
+    width:100%; border-radius:18px; border:1px solid var(--line);
+    box-shadow:0 24px 48px -18px rgba(27,27,31,0.28);
+  }
+
+  .curriculum-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:18px;
+  }
+  @media (max-width:900px){ .curriculum-grid{grid-template-columns:repeat(2, 1fr);} }
+  @media (max-width:560px){ .curriculum-grid{grid-template-columns:1fr;} }
+  .curr-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px;
+  }
+  .curr-wide{ grid-column: span 2; }
+  @media (max-width:560px){ .curr-wide{ grid-column: span 1; } }
+  .curr-week{
+    display:inline-block; font-family:'JetBrains Mono', monospace; font-size:0.7rem; color:var(--red-deep);
+    background:var(--red-pale); padding:4px 10px; border-radius:999px;
+    margin-bottom:12px; font-weight:600;
+  }
+  .curr-card h3{ font-size:1.02rem; margin-bottom:8px; }
+  .curr-card p{ color:var(--ink-soft); font-size:0.92rem; margin:0; }
+  .curr-note{
+    margin-top:26px; color:var(--ink-soft); font-size:0.92rem;
+    border-left:3px solid var(--red); padding-left:14px;
+  }
+
+  .about-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
+  }
+  @media (max-width:780px){ .about-grid{grid-template-columns:1fr;} }
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px;
+  }
+  .card .icon-badge{
+    width:40px; height:40px; border-radius:10px;
+    background:var(--red-pale); color:var(--red-deep);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:16px;
+  }
+  .card .idx{
+    font-size:0.78rem; color:var(--ink-faint); font-weight:600; letter-spacing:0.03em;
+    text-transform:uppercase; margin-bottom:6px; display:block;
+  }
+  .card h3{font-size:1.1rem; margin-bottom:8px;}
+  .card p{color:var(--ink-soft); font-size:0.95rem; margin:0;}
+
+  /* ---------- TEASER (register CTA sections) ---------- */
+  .teaser-box{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:32px; max-width:560px;
+    display:flex; flex-direction:column; align-items:flex-start; gap:6px;
+  }
+  .teaser-box .teaser-meta{
+    font-size:0.88rem; color:var(--ink-soft); margin-bottom:18px;
+  }
+  .teaser-box .btn{ margin-top:4px; }
+  .teaser-fine{font-size:0.82rem; color:var(--ink-faint); margin:10px 0 0;}
+
+  /* ---------- WORKSHOP ---------- */
+  .workshop-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:36px; align-items:start;
+  }
+  @media (max-width:860px){ .workshop-grid{grid-template-columns:1fr;} }
+  .workshop-facts{list-style:none; margin:0 0 22px; padding:0;}
+  .workshop-facts li{
+    padding:12px 0; border-top:1px solid var(--line);
+    display:flex; gap:12px; font-size:0.95rem; color:var(--ink-soft); align-items:flex-start;
+  }
+  .workshop-facts li:first-child{border-top:none;}
+  .workshop-facts li svg{ flex-shrink:0; color:var(--red); margin-top:3px; }
+  .grant-note{
+    font-size:0.85rem; color:var(--ink-faint); margin:18px 0 0; padding-top:18px; border-top:1px dashed var(--line);
+  }
+
+  /* ---------- DIALOG / MODAL FORMS ---------- */
+  dialog{
+    border:none; border-radius:var(--radius-lg); padding:0;
+    max-width:560px; width:92vw; max-height:88vh;
+    box-shadow:0 40px 80px -20px rgba(27,27,31,0.45);
+    color:var(--ink);
+  }
+  dialog::backdrop{ background:rgba(27,27,31,0.55); backdrop-filter:blur(2px); }
+  .dialog-head{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:16px;
+    padding:24px 24px 0;
+  }
+  .dialog-head h2{font-size:1.35rem; margin-bottom:0.2em;}
+  .dialog-head p{color:var(--ink-soft); font-size:0.92rem; margin:0;}
+  .dialog-close{
+    background:var(--paper); border:none; border-radius:50%;
+    width:34px; height:34px; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; color:var(--ink-soft); flex-shrink:0;
+  }
+  .dialog-close:hover{background:var(--red-pale); color:var(--red-deep);}
+  .dialog-body{padding:20px 24px 28px; overflow-y:auto;}
+
+  /* ---------- REGISTRATION FORM ---------- */
+  .reg-form{
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .reg-field{display:flex; flex-direction:column; gap:6px;}
+  .reg-field label{font-size:0.86rem; font-weight:600; color:var(--ink);}
+  .reg-field input, .reg-field select, .reg-field textarea{
+    font-family:'Inter', sans-serif; font-size:0.95rem;
+    padding:12px 14px; border:1.5px solid var(--line-strong); border-radius:10px;
+    background:#fff; color:var(--ink);
+  }
+  .reg-field input:focus, .reg-field select:focus, .reg-field textarea:focus{
+    outline:none; border-color:var(--red);
+  }
+  .reg-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:520px){ .reg-row{grid-template-columns:1fr;} }
+  .reg-submit{
+    background:var(--red); color:#fff; border:none; cursor:pointer;
+    padding:14px 24px; border-radius:999px; font-weight:600; font-size:0.95rem;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .reg-submit:hover{transform:translateY(-2px); box-shadow:0 10px 24px rgba(229,35,58,0.3); background:var(--red-deep);}
+  .reg-note{font-size:0.8rem; color:var(--ink-faint); margin-top:2px;}
+
+  /* ---------- SPONSORS ---------- */
+  .sponsor-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; align-items:stretch;
+  }
+  @media (max-width:860px){ .sponsor-grid{grid-template-columns:1fr;} }
+  .sponsor-card{
+    background:#fff; border:1.5px solid var(--line); border-radius:var(--radius-lg);
+    padding:28px; display:flex; flex-direction:column; gap:6px;
+    border-top:4px solid var(--tier-color, var(--line));
+  }
+  .sponsor-card.tier-bronze{ --tier-color: var(--bronze); }
+  .sponsor-card.tier-silver{ --tier-color: var(--silver); }
+  .sponsor-card.tier-gold{ --tier-color: var(--tier-gold); }
+  .sponsor-card.featured{
+    border-color:var(--tier-gold);
+    box-shadow:0 24px 50px -24px rgba(180,131,13,0.45);
+    position:relative;
+    transform:translateY(-6px);
+  }
+  @media (max-width:860px){ .sponsor-card.featured{ transform:none; } }
+  .sponsor-ribbon{
+    position:absolute; top:-13px; left:28px;
+    background:var(--tier-gold); color:#fff;
+    font-family:'JetBrains Mono', monospace; font-size:0.65rem; font-weight:700; letter-spacing:0.04em;
+    padding:5px 12px; border-radius:999px;
+  }
+  .sponsor-tier-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'JetBrains Mono', monospace; font-size:0.72rem; font-weight:700; letter-spacing:0.03em;
+    color:var(--tier-color, var(--ink-soft));
+    margin-bottom:10px;
+  }
+  .sponsor-tier-badge svg{color:var(--tier-color);}
+  .sponsor-price{
+    font-family:'Fraunces', serif; font-weight:700; font-size:1.7rem; color:var(--ink);
+    margin-bottom:14px;
+  }
+  .sponsor-card ul{list-style:none; margin:0; padding:0; flex-grow:1;}
+  .sponsor-card li{
+    padding:9px 0; border-top:1px solid var(--line);
+    font-size:0.92rem; color:var(--ink-soft);
+    display:flex; gap:10px; align-items:flex-start;
+  }
+  .sponsor-card li:first-child{border-top:none;}
+  .sponsor-card li svg{flex-shrink:0; margin-top:3px; color:var(--tier-color);}
+  .sponsor-cta{
+    margin-top:28px; padding:26px; background:var(--paper); border-radius:var(--radius-lg);
+    display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .sponsor-cta p{margin:0; color:var(--ink-soft); font-size:0.95rem; max-width:44ch;}
+
+  /* ---------- CODE OF CONDUCT ---------- */
+  .conduct-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:32px; max-width:760px;
+  }
+  .conduct-card p{color:var(--ink-soft); font-size:0.98rem;}
+  .conduct-card a.inline{color:var(--red-deep); font-weight:600; text-decoration:underline;}
+  .conduct-report{
+    margin-top:22px; padding-top:22px; border-top:1px solid var(--line);
+  }
+  .conduct-report ul{list-style:none; margin:0; padding:0; color:var(--ink-soft); font-size:0.95rem;}
+  .conduct-report li{padding:6px 0;}
+
+  /* ---------- RESOURCES / LINKS ---------- */
+  .res-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:18px;
+  }
+  @media (max-width:900px){ .res-grid{grid-template-columns:repeat(2, 1fr);} }
+  @media (max-width:520px){ .res-grid{grid-template-columns:1fr;} }
+  .res-card{
+    display:flex; flex-direction:column; gap:14px;
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px; text-decoration:none; color:var(--ink);
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .res-card:hover{
+    transform:translateY(-3px); border-color:transparent;
+    box-shadow:0 16px 30px -12px rgba(27,27,31,0.16);
+  }
+  .res-icon{
+    width:42px; height:42px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--red-pale); color:var(--red-deep);
+  }
+  .res-card h3{font-size:1rem; margin:0;}
+  .res-card span.sub{color:var(--ink-faint); font-size:0.84rem; font-family:'JetBrains Mono', monospace;}
+
+  /* ---------- CONTACT STRIP ---------- */
+  .contact{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:18px; margin-top:20px;
+  }
+  @media (max-width:600px){ .contact{grid-template-columns:1fr;} }
+  .contact-item{
+    display:flex; align-items:center; gap:14px;
+    padding:18px 20px; background:#fff; border:1px solid var(--line); border-radius:12px;
+    text-decoration:none;
+  }
+  .contact-item .label{font-size:0.76rem; color:var(--ink-faint); font-family:'JetBrains Mono', monospace;}
+  .contact-item .val{font-weight:600; font-size:0.96rem; color:var(--ink);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink); color:#B7B7BE; padding:44px 0 26px;
+  }
+  .foot-grid{
+    display:flex; justify-content:space-between; align-items:flex-start; gap:24px; flex-wrap:wrap;
+    padding-bottom:30px; border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  .foot-brand{display:flex; align-items:center; color:#fff; font-family:'Fraunces', serif; font-weight:700; font-size:1.1rem;}
+  .foot-brand img{width:44px; height:44px; object-fit:contain; margin-right:10px;}
+  .foot-links{display:flex; gap:26px; flex-wrap:wrap;}
+  .foot-links a{text-decoration:none; color:#B7B7BE; font-size:0.9rem;}
+  .foot-links a:hover{color:#fff;}
+  .foot-bottom{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    padding-top:20px; font-size:0.83rem; color:#84848C;
+  }
+  .foot-bottom .mono{color:#84848C;}
+
+  .text-center{text-align:center;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav" id="nav">
+    <a href="#top" class="brand">
+      <img src="assets/logo.png" alt="PyLadies Rivers logo" class="brand-mark">
+      <span>PyLadies Rivers</span>
+    </a>
+    <ul class="links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#program">Training</a></li>
+      <li><a href="#curriculum">Curriculum</a></li>
+      <li><a href="#workshop">Workshop</a></li>
+      <li><a href="#sponsors">Sponsors</a></li>
+      <li><a href="#conduct">Code of Conduct</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="#cohort-register">Register</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobilePanel">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#about">About</a>
+    <a href="#program">Training</a>
+    <a href="#curriculum">Curriculum</a>
+    <a href="#workshop">Workshop</a>
+    <a href="#sponsors">Sponsors</a>
+    <a href="#conduct">Code of Conduct</a>
+    <a href="#resources">Resources</a>
+    <a href="#contact">Contact</a>
+    <a href="#cohort-register" class="mp-cta">Register for the Cohort</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span> OFFICIAL PYLADIES GLOBAL CHAPTER · RIVERS STATE, NIGERIA</span>
+        <h1>Python, taught by<br><span class="accent">women</span>, for everyone.</h1>
+        <p class="lead">PyLadies Rivers brings free, beginner-friendly Python training to Port Harcourt and beyond — building a community of women and allies who write code, ship projects, and mentor the next cohort.</p>
+
+        <div class="urgency-pill">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+          Oct/Nov cohort starts in <strong id="heroCountdownDays">—</strong> — free &amp; open now
+        </div>
+
+        <div class="hero-ctas">
+          <button type="button" class="btn btn-primary js-open-cohort-form">Register for the Cohort</button>
+          <a class="btn btn-ghost" href="#program">See the training program</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="assets/hero-community.jpg" alt="Illustration of PyLadies Rivers members coding together by the Rivers State waterfront">
+      </div>
+    </div>
+  </section>
+
+  <!-- URGENT: OCT/NOV 2026 COHORT -->
+  <section id="program">
+    <div class="wrap">
+      <div class="cohort-block">
+        <div>
+          <span class="badge-open"><span class="live-dot"></span> REGISTRATION OPEN — OCT/NOV 2026 COHORT</span>
+          <h2>Our next Python cohort starts October 3rd</h2>
+
+          <div class="countdown" role="status" aria-live="polite">
+            <div class="stat">
+              <span class="num" id="cdDays">—</span>
+              <span class="lbl">Days</span>
+            </div>
+            <div class="stat">
+              <span class="num" id="cdHours">—</span>
+              <span class="lbl">Hours</span>
+            </div>
+          </div>
+          <p class="countdown-note" id="countdownNote">until doors open — Saturday, October 3, 2026</p>
+
+          <p>Are you ready to learn a valuable tech skill? No matter your background, you can join our community, learn alongside others, receive mentorship, and take your first steps into Python programming.</p>
+          <p>8 weeks, every Saturday, October 3 – November 21, 2026. Registration is open now.</p>
+          <button type="button" class="btn btn-primary js-open-cohort-form" style="margin-top:16px; background:#fff; color:var(--red-deep);">Register for the cohort</button>
+        </div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> No coding experience required — start from zero</li>
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Guided curriculum videos, built for self-paced review</li>
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Mentorship and hands-on beginner-friendly projects</li>
+          <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Community support via WhatsApp and our GitHub org</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about-top">
+        <div>
+          <span class="eyebrow">ABOUT THE CHAPTER</span>
+          <h2>A home base for Python in Rivers State</h2>
+          <p>PyLadies is a global mentorship group with a mission to increase the number of women in tech through Python. Rivers Chapter is where that mission gets local — real classes, real projects, real people.</p>
+          <p class="pillars mono">WOMEN · NON-BINARY · COMMUNITY</p>
+        </div>
+        <img class="about-mascots" src="assets/mascots.png" alt="Illustrated PyLadies Rivers community members, each with a different natural hairstyle">
+      </div>
+      <div class="about-grid">
+        <div class="card">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <span class="idx">For beginners</span>
+          <h3>Learn from zero</h3>
+          <p>No prior coding experience needed. We start from Python fundamentals and build toward real, usable projects.</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <span class="idx">For the community</span>
+          <h3>Mentorship, not just modules</h3>
+          <p>Every learner is paired with support — questions get answered, and progress gets celebrated, not just graded.</p>
+        </div>
+        <div class="card">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+          </div>
+          <span class="idx">For the long run</span>
+          <h3>A chapter that keeps building</h3>
+          <p>Beyond training, we run an active YouTube channel, GitHub org, and WhatsApp community to keep learning going year-round.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEET ADA -->
+  <section class="alt">
+    <div class="wrap ada-grid">
+      <img class="ada-img" src="assets/ada-mentor.jpg" alt="Ada, the PyLadies AI Mentor character">
+      <div>
+        <span class="eyebrow">MEET ADA</span>
+        <h2>Your AI mentor, on call</h2>
+        <p>Ada is the PyLadies Rivers AI mentor — named for Ada Lovelace. Ask her questions, debug your code, and get complex concepts explained in plain language, any time you're stuck between sessions.</p>
+        <a class="btn btn-primary" href="https://wa.me/2347035682478?text=Hi%2C%20I%27d%20like%20to%20ask%20about%20access%20to%20Ada" target="_blank" rel="noopener">Ask about access to Ada</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COHORT REGISTRATION (teaser -> opens dialog) -->
+  <section id="cohort-register" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">REGISTER NOW</span>
+        <h2>Join the October/November 2026 Cohort</h2>
+        <p>8 weeks, every Saturday, starting October 3, 2026. Free, beginner-friendly, and open to all women and girls in Rivers State.</p>
+      </div>
+      <div class="teaser-box">
+        <span class="teaser-meta mono">TAKES ABOUT 2 MINUTES</span>
+        <button type="button" class="btn btn-primary js-open-cohort-form">Register for the Cohort</button>
+        <p class="teaser-fine">Your details go directly to the PyLadies Rivers team and are never shared publicly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRICULUM -->
+  <section id="curriculum" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">CURRICULUM</span>
+        <h2>What the 8 weeks cover</h2>
+        <p>From first line of code to a finished project — the program is built as five progressive modules stretched across eight weeks of live sessions and practice.</p>
+      </div>
+      <div class="curriculum-grid">
+        <div class="curr-card">
+          <span class="curr-week mono">WEEK 1–2</span>
+          <h3>Basic Syntax</h3>
+          <p>Variables, data types, operators, and writing your first working Python scripts.</p>
+        </div>
+        <div class="curr-card">
+          <span class="curr-week mono">WEEK 3</span>
+          <h3>Data Structures</h3>
+          <p>Lists, tuples, dictionaries, and sets — how to store and organize real information.</p>
+        </div>
+        <div class="curr-card">
+          <span class="curr-week mono">WEEK 4–5</span>
+          <h3>Control Flow</h3>
+          <p>Conditionals, loops, and functions, with practice exercises after every session.</p>
+        </div>
+        <div class="curr-card">
+          <span class="curr-week mono">WEEK 6</span>
+          <h3>File Management</h3>
+          <p>Reading and writing files, working with paths, and handling real data on disk.</p>
+        </div>
+        <div class="curr-card curr-wide">
+          <span class="curr-week mono">WEEK 7–8</span>
+          <h3>Build a Real Project</h3>
+          <p>Everything comes together in a final, working project you build and present — plus mentor support to debug, polish, and finish strong.</p>
+        </div>
+      </div>
+      <p class="curr-note">Delivered through weekly live sessions, WhatsApp-based support, and the PyLadies Handbook — with Ada, our AI mentor, available for questions between sessions.</p>
+    </div>
+  </section>
+
+  <!-- WORKSHOP -->
+  <section id="workshop">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">UPCOMING WORKSHOP</span>
+        <h2>In-Person Python Workshop — Port Harcourt</h2>
+        <p>A free, 2-day, in-person, mentor-led Python workshop for beginner women and girls in Rivers State — extending our WhatsApp-based training program for learners who want hands-on, in-person support.</p>
+      </div>
+      <div class="workshop-grid">
+        <div>
+          <ul class="workshop-facts">
+            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Friday, February 12, 2027 — 10am–4pm (6 hours): Python fundamentals, guided practice</li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Saturday, February 13, 2027 — 10am–4pm (6 hours): control flow, functions, mentor-supported mini-project</li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Location: Port Harcourt, Rivers State, Nigeria</li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg> Open to 30 beginners — no prior coding experience required</li>
+            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg> Mentor-supported, roughly 1 mentor per 7–8 participants</li>
+          </ul>
+          <p class="grant-note">Workshop funding application submitted to the Python Software Foundation Grants Program — decision pending.</p>
+        </div>
+        <div class="teaser-box">
+          <span class="teaser-meta mono">TAKES ABOUT 2 MINUTES</span>
+          <button type="button" class="btn btn-primary js-open-workshop-form">Register for the Workshop</button>
+          <p class="teaser-fine">Your details go directly to the PyLadies Rivers team and are never shared publicly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPONSORS -->
+  <section id="sponsors" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">PARTNER WITH US</span>
+        <h2>Sponsor the Port Harcourt Workshop</h2>
+        <p>Help us bring 30 beginner women and girls into tech with a free, in-person Python workshop on February 12–13, 2027. Sponsorship covers venue, materials, mentor support, and refreshments — and puts your organization in front of a growing community of Python learners in Rivers State.</p>
+      </div>
+      <div class="sponsor-grid">
+        <div class="sponsor-card tier-bronze">
+          <span class="sponsor-tier-badge"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 6 22l6-3 6 3-2.5-8.5"/></svg> BRONZE</span>
+          <span class="sponsor-price">$100</span>
+          <ul>
+            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Logo on the workshop page of our website</li>
+            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Shoutout on our WhatsApp channel</li>
+            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Mention during workshop opening remarks</li>
+          </ul>
+        </div>
+        <div class="sponsor-card tier-silver">
+          <span class="sponsor-tier-badge"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 6 22l6-3 6 3-2.5-8.5"/></svg> SILVER</span>
+          <span class="sponsor-price">$300</span>
+          <ul>
+            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Everything in Bronze</li>
+            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Logo on printed workshop materials and certificates</li>
+            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Social media post on our channels naming your organization</li>
+            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 5-minute speaking slot at the workshop (optional)</li>
+          </ul>
+        </div>
+        <div class="sponsor-card tier-gold featured">
+          <span class="sponsor-ribbon">MOST IMPACT</span>
+          <span class="sponsor-tier-badge"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 6 22l6-3 6 3-2.5-8.5"/></svg> GOLD</span>
+          <span class="sponsor-price">$700+</span>
+          <ul>
+            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Everything in Silver</li>
+            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Featured placement as lead sponsor across all materials and the website</li>
+            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Dedicated YouTube shoutout video segment</li>
+            <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> First right of refusal to sponsor future PyLadies Rivers workshops</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sponsor-cta">
+        <p>Every contribution — cash, venue, refreshments, or in-kind support — helps. Get in touch to discuss options.</p>
+        <a class="btn btn-primary" href="mailto:rivers@pyladies.com?subject=Sponsorship%20Inquiry%20-%20Feb%202027%20Workshop">Become a sponsor</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CODE OF CONDUCT -->
+  <section id="conduct">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">CODE OF CONDUCT</span>
+        <h2>A safe, respectful space for everyone</h2>
+      </div>
+      <div class="conduct-card">
+        <p>PyLadies Rivers is an official PyLadies Global chapter and adheres to the <a class="inline" href="https://pyladies.com/CodeOfConduct/" target="_blank" rel="noopener">PyLadies Code of Conduct</a>, adapted from the Python Software Foundation's Code of Conduct. This applies to all chapter events, training sessions, and community spaces — including our WhatsApp community, GitHub org, YouTube channel, and in-person workshops.</p>
+        <div class="conduct-report">
+          <p><strong>To report a concern or violation:</strong><br>
+          Email <a class="inline" href="mailto:rivers@pyladies.com">rivers@pyladies.com</a> (chapter contact) or
+          <a class="inline" href="mailto:coc@pyladies.com">coc@pyladies.com</a> (PyLadies Global Code of Conduct work group).
+          All reports are handled promptly and confidentially.</p>
+        </div>
+        <div class="conduct-report">
+          <p><strong>Code of Conduct Enforcement Team:</strong></p>
+          <ul>
+            <li>Fredrick Ughimi — Lead Organizer — <a class="inline" href="mailto:rivers@pyladies.com">rivers@pyladies.com</a></li>
+            <li>Fabian Uzukwu — Mentor — <a class="inline" href="mailto:mayorogbanna@gmail.com">mayorogbanna@gmail.com</a> · <a class="inline" href="tel:+2347033726470">+234 703 372 6470</a></li>
+            <li>Anita Akhor — Co-organizer — <a class="inline" href="tel:+2348033170999">+234 803 317 0999</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES -->
+  <section id="resources" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">LINKS &amp; RESOURCES</span>
+        <h2>Find us everywhere we build</h2>
+        <p>Videos, code, community chat, and direct contact — all the ways to follow or join PyLadies Rivers.</p>
+      </div>
+      <div class="res-grid">
+        <a class="res-card" href="https://www.youtube.com/@RiversPyLadies" target="_blank" rel="noopener">
+          <span class="res-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M21.6 7.2c-.25-1.5-1.4-2.6-2.9-2.85C16.9 4 12 4 12 4s-4.9 0-6.7.35c-1.5.25-2.65 1.35-2.9 2.85C2 9 2 12 2 12s0 3 .4 4.8c.25 1.5 1.4 2.6 2.9 2.85C7.1 20 12 20 12 20s4.9 0 6.7-.35c1.5-.25 2.65-1.35 2.9-2.85.4-1.8.4-4.8.4-4.8s0-3-.4-4.8zM10 15.5v-7l6 3.5-6 3.5z"/></svg></span>
+          <h3>YouTube</h3>
+          <span class="sub">@RiversPyLadies</span>
+        </a>
+        <a class="res-card" href="https://github.com/orgs/PyLadies-Rivers/dashboard" target="_blank" rel="noopener">
+          <span class="res-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.17c0 4.47 2.87 8.26 6.84 9.6.5.1.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.9-1.33 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.18 10.18 0 0 0 22 12.17C22 6.58 17.52 2 12 2z"/></svg></span>
+          <h3>GitHub</h3>
+          <span class="sub">PyLadies-Rivers org</span>
+        </a>
+        <a class="res-card" href="https://whatsapp.com/channel/0029Vb6Et85KrWR2q7H9j52o" target="_blank" rel="noopener">
+          <span class="res-icon"><svg viewBox="0 0 32 32" width="20" height="20" fill="currentColor"><path d="M16.001 3C8.83 3 3 8.82 3 15.98c0 2.39.63 4.63 1.73 6.57L3 29l6.62-1.7a13.02 13.02 0 0 0 6.38 1.66h.01c7.17 0 13-5.82 13-12.98C29 8.82 23.17 3 16.001 3zm7.62 18.53c-.32.9-1.85 1.72-2.56 1.83-.66.1-1.5.14-2.42-.15-.56-.18-1.28-.42-2.2-.82-3.87-1.67-6.4-5.56-6.6-5.82-.19-.26-1.58-2.1-1.58-4.01 0-1.9 1-2.84 1.35-3.23.35-.38.77-.48 1.02-.48.26 0 .51 0 .74.01.24.01.55-.09.86.66.32.77 1.08 2.66 1.18 2.85.1.19.16.42.03.68-.13.26-.19.42-.38.65-.19.22-.4.5-.57.67-.19.19-.39.4-.17.78.23.38 1.01 1.67 2.18 2.71 1.5 1.34 2.76 1.75 3.14 1.95.38.19.6.16.82-.1.23-.26.97-1.13 1.23-1.52.26-.38.51-.32.85-.19.35.13 2.2 1.04 2.58 1.23.38.19.63.29.72.45.1.16.1.93-.22 1.83z"/></svg></span>
+          <h3>WhatsApp Channel</h3>
+          <span class="sub">Public updates</span>
+        </a>
+        <a class="res-card" href="https://pyladies-rivers.github.io/website/" target="_blank" rel="noopener">
+          <span class="res-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/></svg></span>
+          <h3>Website</h3>
+          <span class="sub">pyladies-rivers.github.io</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">GET IN TOUCH</span>
+        <h2>Reach the chapter directly</h2>
+        <p>Questions about the training program, partnerships, or the chapter in general — these go straight to the team.</p>
+      </div>
+      <div class="contact">
+        <a class="contact-item" href="mailto:rivers@pyladies.com">
+          <span class="res-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+          <span>
+            <span class="label" style="display:block;">EMAIL</span>
+            <span class="val">rivers@pyladies.com</span>
+          </span>
+        </a>
+        <a class="contact-item" href="tel:+2347035682478">
+          <span class="res-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg></span>
+          <span>
+            <span class="label" style="display:block;">PHONE</span>
+            <span class="val">+234 703 568 2478 · +234 805 035 9974</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand"><img src="assets/logo.png" alt="">PyLadies Rivers</div>
+      <div class="foot-links">
+        <a href="#about">About</a>
+        <a href="#program">Training</a>
+        <a href="#workshop">Workshop</a>
+        <a href="#sponsors">Sponsors</a>
+        <a href="#conduct">Code of Conduct</a>
+        <a href="#resources">Resources</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 PyLadies Rivers. An official PyLadies Global chapter.</span>
+      <span class="mono">&gt;&gt;&gt; print("built in Rivers, coded for everyone")</span>
+    </div>
+  </div>
+</footer>
+
+<!-- COHORT REGISTRATION DIALOG -->
+<dialog id="cohortDialog">
+  <div class="dialog-head">
+    <div>
+      <h2>Join the October/November 2026 Cohort</h2>
+      <p>8 weeks, every Saturday, starting October 3, 2026.</p>
+    </div>
+    <button type="button" class="dialog-close js-close-dialog" aria-label="Close">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <div class="dialog-body">
+    <form class="reg-form" action="https://formsubmit.co/rivers@pyladies.com" method="POST">
+      <input type="hidden" name="_subject" value="New Oct/Nov 2026 Cohort Registration">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://pyladies-rivers.github.io/website/#cohort-register">
+
+      <div class="reg-row">
+        <div class="reg-field">
+          <label for="cohort-name">Full Name</label>
+          <input type="text" id="cohort-name" name="Full Name" required>
+        </div>
+        <div class="reg-field">
+          <label for="cohort-email">Email Address</label>
+          <input type="email" id="cohort-email" name="Email" required>
+        </div>
+      </div>
+
+      <div class="reg-row">
+        <div class="reg-field">
+          <label for="cohort-phone">WhatsApp Number</label>
+          <input type="tel" id="cohort-phone" name="WhatsApp Number" placeholder="+234..." required>
+        </div>
+        <div class="reg-field">
+          <label for="cohort-age">Age Range</label>
+          <select id="cohort-age" name="Age Range" required>
+            <option value="">Select...</option>
+            <option>Under 18</option>
+            <option>18–24</option>
+            <option>25–34</option>
+            <option>35+</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="reg-field">
+        <label for="cohort-exp">Prior coding experience</label>
+        <select id="cohort-exp" name="Prior Experience" required>
+          <option value="">Select...</option>
+          <option>None at all</option>
+          <option>A little (self-taught/dabbled)</option>
+          <option>Some formal exposure</option>
+        </select>
+      </div>
+
+      <div class="reg-field">
+        <label for="cohort-device">What will you use to join sessions?</label>
+        <select id="cohort-device" name="Device Access" required>
+          <option value="">Select...</option>
+          <option>Laptop with reliable internet</option>
+          <option>Phone only</option>
+          <option>Laptop but limited data/internet</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+
+      <div class="reg-field">
+        <label for="cohort-commit">Can you commit to weekly Saturday sessions for 8 weeks?</label>
+        <select id="cohort-commit" name="Weekly Commitment" required>
+          <option value="">Select...</option>
+          <option>Yes</option>
+          <option>Mostly, may miss a session or two</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+
+      <button type="submit" class="reg-submit">Register for the Cohort</button>
+      <p class="reg-note">Your details go directly to the PyLadies Rivers team and are never shared publicly.</p>
+    </form>
+  </div>
+</dialog>
+
+<!-- WORKSHOP REGISTRATION DIALOG -->
+<dialog id="workshopDialog">
+  <div class="dialog-head">
+    <div>
+      <h2>In-Person Workshop Registration</h2>
+      <p>February 12–13, 2027 · Port Harcourt.</p>
+    </div>
+    <button type="button" class="dialog-close js-close-dialog" aria-label="Close">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <div class="dialog-body">
+    <form class="reg-form" action="https://formsubmit.co/rivers@pyladies.com" method="POST">
+      <input type="hidden" name="_subject" value="New PyLadies Rivers Workshop Registration">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://pyladies-rivers.github.io/website/#workshop">
+
+      <div class="reg-row">
+        <div class="reg-field">
+          <label for="reg-name">Full Name</label>
+          <input type="text" id="reg-name" name="Full Name" required>
+        </div>
+        <div class="reg-field">
+          <label for="reg-email">Email Address</label>
+          <input type="email" id="reg-email" name="Email" required>
+        </div>
+      </div>
+
+      <div class="reg-row">
+        <div class="reg-field">
+          <label for="reg-phone">WhatsApp Number</label>
+          <input type="tel" id="reg-phone" name="WhatsApp Number" placeholder="+234..." required>
+        </div>
+        <div class="reg-field">
+          <label for="reg-age">Age Range</label>
+          <select id="reg-age" name="Age Range" required>
+            <option value="">Select...</option>
+            <option>Under 18</option>
+            <option>18–24</option>
+            <option>25–34</option>
+            <option>35+</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="reg-field">
+        <label for="reg-exp">Prior coding experience</label>
+        <select id="reg-exp" name="Prior Experience" required>
+          <option value="">Select...</option>
+          <option>None at all</option>
+          <option>A little (self-taught/dabbled)</option>
+          <option>Some formal exposure</option>
+        </select>
+      </div>
+
+      <div class="reg-row">
+        <div class="reg-field">
+          <label for="reg-laptop">Access to a laptop for the workshop?</label>
+          <select id="reg-laptop" name="Laptop Access" required>
+            <option value="">Select...</option>
+            <option>Yes</option>
+            <option>No</option>
+            <option>Can share with someone</option>
+          </select>
+        </div>
+        <div class="reg-field">
+          <label for="reg-days">Can you attend both days?</label>
+          <select id="reg-days" name="Both Days" required>
+            <option value="">Select...</option>
+            <option>Yes</option>
+            <option>No</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="reg-field">
+        <label for="reg-notes">Dietary restrictions or accessibility needs (optional)</label>
+        <textarea id="reg-notes" name="Notes" rows="2"></textarea>
+      </div>
+
+      <button type="submit" class="reg-submit">Submit Registration</button>
+      <p class="reg-note">Your details go directly to the PyLadies Rivers team and are never shared publicly.</p>
+    </form>
+  </div>
+</dialog>
+
+<script>
+  // Mobile menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const panel = document.getElementById('mobilePanel');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = panel.classList.toggle('is-open');
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
+  });
+  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    panel.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Registration dialogs
+  const cohortDialog = document.getElementById('cohortDialog');
+  const workshopDialog = document.getElementById('workshopDialog');
+  [cohortDialog, workshopDialog].forEach(dlg => {
+    dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+    dlg.querySelectorAll('.js-close-dialog').forEach(btn => btn.addEventListener('click', () => dlg.close()));
+  });
+  document.querySelectorAll('.js-open-cohort-form').forEach(btn =>
+    btn.addEventListener('click', () => cohortDialog.showModal())
+  );
+  document.querySelectorAll('.js-open-workshop-form').forEach(btn =>
+    btn.addEventListener('click', () => workshopDialog.showModal())
+  );
+
+  // Countdown to Oct 3, 2026, 00:00 West Africa Time
+  (function () {
+    const target = new Date('2026-10-03T00:00:00+01:00').getTime();
+    const cdDays = document.getElementById('cdDays');
+    const cdHours = document.getElementById('cdHours');
+    const heroDays = document.getElementById('heroCountdownDays');
+    const note = document.getElementById('countdownNote');
+
+    function render() {
+      const diff = target - Date.now();
+      if (diff <= 0) {
+        cdDays.textContent = '0';
+        cdHours.textContent = '0';
+        heroDays.textContent = 'now';
+        note.textContent = 'the Oct/Nov 2026 cohort is underway — register your interest for the next one';
+        return;
+      }
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      cdDays.textContent = String(days);
+      cdHours.textContent = String(hours);
+      heroDays.textContent = days + (days === 1 ? ' day' : ' days');
+    }
+    render();
+    setInterval(render, 60000);
+  })();
+</script>
+
+</body>
+</html>
